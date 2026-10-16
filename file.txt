@@ -1,0 +1,249 @@
+ASYNCHRONOUS JAVASCRIPT
+
+Synchronous means doing things one after another, waiting for each task to finish before starting the next.
+
+Asynchronous means starting a task that takes time and allowing other things to continue while waiting for it to finish.
+
+Asynchronous JavaScript allows JavaScript to handle tasks that take time without blocking other work.
+
+     Examples of asynchronous tasks include:
+
+        Fetching data from a server.
+
+         Setting timers.
+
+         Sending requests to an API.
+
+
+         avaScript allows certain operations to complete later while other code continues executing.
+
+Example:
+
+console.log("First");
+
+setTimeout(() => {
+  console.log("Second");
+}, 2000);
+
+console.log("Third");
+
+Output:
+
+First
+Third
+Second
+
+Explanation:
+
+The first message is printed.
+
+setTimeout() schedules a function to run after approximately two seconds.
+
+JavaScript continues executing the remaining code.
+
+The second message is printed after the timer expires and the callback can run.
+
+4. Difference Between Synchronous and Asynchronous JavaScript
+
+////Synchronous JavaScript
+
+Executes statements in sequence.
+
+A task may block later tasks until it finishes.
+
+Suitable for ordinary operations that do not require waiting for external results.
+
+////Asynchronous JavaScript
+
+Allows other work to continue while waiting for certain operations.
+
+Commonly used for network requests, timers, and file operations.
+
+Helps applications remain responsive.
+
+5. What Is a Callback?
+
+A callback is a function passed as an argument to another function so that it can be called later.
+
+Example:
+
+function greet(name) {
+  console.log("Hello " + name);
+}
+
+function processUser(callback) {
+  callback("June");
+}
+
+processUser(greet);
+
+Output:
+
+Hello June
+
+
+Callbacks are used in both synchronous and asynchronous JavaScript.
+
+6. What Is a Promise?
+
+A Promise is a JavaScript object that represents the eventual success or failure of an asynchronous operation.
+
+A Promise has three states:
+
+Pending: The operation has not completed.
+
+Fulfilled: The operation completed successfully.
+
+Rejected: The operation failed.
+
+Example:
+
+const myPromise = new Promise((resolve, reject) => {
+  resolve("Task completed successfully");
+});
+
+myPromise.then(result => {
+  console.log(result);
+});
+
+Output:
+
+Task completed successfully
+
+7. Promise Methods
+
+then(): Handles a fulfilled Promise and returns a new Promise.
+
+catch(): Handles a rejection in a Promise chain.
+
+finally(): Runs after the Promise settles, whether fulfilled or rejected.
+
+Example:
+
+myPromise
+  .then(result => console.log(result))
+  .catch(error => console.log(error))
+  .finally(() => console.log("Finished"));
+
+8. The async Keyword
+
+The async keyword is used to declare an asynchronous function.
+
+An async function always returns a Promise.
+
+Example:
+
+async function greet() {
+  return "Hello";
+}
+
+greet().then(message => console.log(message));
+
+Output:
+
+Hello
+
+9. The await Keyword
+
+The await keyword is used inside an async function to wait for a Promise to settle before continuing that function.
+
+Example:
+
+async function getMessage() {
+  const message = await Promise.resolve("Hello, June");
+  console.log(message);
+}
+
+getMessage();
+
+Output:
+
+Hello, June
+
+await does not block the entire JavaScript program. It pauses the execution of the current async function while the Promise settles.
+
+10. Error Handling in Asynchronous JavaScript
+
+Errors can be handled using .catch() or try...catch with async and await.
+
+Example:
+
+async function getData() {
+  try {
+    const result = await Promise.reject("Something went wrong");
+    console.log(result);
+  } catch (error) {
+    console.log(error);
+  }
+}
+
+getData();
+
+Output:
+
+Something went wrong
+
+Error handling helps prevent failures from going unnoticed and allows programs to respond appropriately.
+
+11. What Is the Event Loop?
+
+The event loop is a mechanism in JavaScript that helps coordinate the execution of synchronous code and scheduled asynchronous callbacks.
+
+JavaScript executes synchronous code first. When the call stack is clear, the event loop helps schedule eligible callbacks for execution.
+
+Promise callbacks, also called microtasks, are generally processed before timer callbacks, which use the task queue.
+
+Example:
+
+console.log("A");
+
+setTimeout(() => console.log("B"), 0);
+
+Promise.resolve().then(() => console.log("C"));
+
+console.log("D");
+
+Output:
+
+A
+D
+C
+B
+
+Explanation:
+
+A and D execute synchronously.
+
+C runs as a Promise microtask.
+
+B runs as a timer callback.
+
+12. Advantages of Asynchronous JavaScript
+
+Improves application responsiveness.
+
+Allows other work to continue while waiting for external operations.
+
+Helps handle network requests efficiently.
+
+Supports working with APIs and server data.
+
+Helps create smoother user experiences.
+
+13. Common Uses of Asynchronous JavaScript
+
+Fetching data from APIs.
+
+Loading information from servers.
+
+Handling timers.
+
+Processing file operations in Node.js.
+
+Submitting forms and waiting for responses.
+
+Updating website content without reloading the whole page.
+
+Conclusion
+
+Asynchronous JavaScript is an important concept in web development. It allows programs to handle time-consuming operations while other work continues. Its main concepts include callbacks, Promises, async, await, error handling, and the event loop.
